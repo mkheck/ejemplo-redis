@@ -56,14 +56,11 @@ class PollPlaneFinder {
                 .forEach(ac -> repository.save(ac));
 
         repository.findAll().forEach(System.out::println);
-
-//        template.opsForValue()
-//                .getOperations()
-//                .keys("*")
-//                .forEach(ac -> System.out.println(template.opsForValue().get(ac)));
     }
 }
 
+// MH: Toggle (comment out/in) above PollPlaneFinder class & this one to use repos or templates
+// MH: Yes, I know it's crude, it's a QnD WIP ;)
 /*@EnableScheduling
 @Component
 class PollPlaneFinder {
