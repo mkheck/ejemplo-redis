@@ -33,17 +33,19 @@ class PollPlaneFinder {
     private WebClient client = WebClient.create("http://localhost:8080");
 
     private final RedisConnectionFactory connectionFactory;
-    private final RedisConnection connection;
-    private final RedisTemplate<String, String> template;
+//    private final RedisConnection connection;
+//    private final RedisTemplate<String, String> template;
     private final AircraftRepository repository;
 
-    PollPlaneFinder(RedisConnectionFactory connectionFactory, RedisTemplate<String, String> template, AircraftRepository repository) {
+//    PollPlaneFinder(RedisConnectionFactory connectionFactory, RedisTemplate<String, String> template, AircraftRepository repository) {
+    PollPlaneFinder(RedisConnectionFactory connectionFactory, AircraftRepository repository) {
         this.connectionFactory = connectionFactory;
-        this.connection = connectionFactory.getConnection();
-        this.template = template;
         this.repository = repository;
+//        this.connection = connectionFactory.getConnection();
+//        this.template = template;
 
-        connection.serverCommands().flushDb();
+//        connection.serverCommands().flushDb();
+        connectionFactory.getConnection().serverCommands().flushDb();
     }
 
     @Scheduled(fixedRate = 1000)
@@ -53,7 +55,7 @@ class PollPlaneFinder {
                 .bodyToFlux(Aircraft.class)
                 .filter(plane -> !plane.getReg().isEmpty())
                 .toStream()
-                .forEach(ac -> repository.save(ac));
+                .forEach(repository::save);
 
         repository.findAll().forEach(System.out::println);
     }
