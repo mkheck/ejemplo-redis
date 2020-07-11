@@ -26,7 +26,6 @@ public class EjemploRedisApplication {
         template.setConnectionFactory(factory);
         template.setDefaultSerializer(serializer);
         template.setKeySerializer(new StringRedisSerializer());
-        System.out.println("Default serializer? " + template.isEnableDefaultSerializer());
 
         return template;
     }
