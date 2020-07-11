@@ -73,7 +73,6 @@ class PollPlaneFinder {
 //
 //    private final RedisConnectionFactory connectionFactory;
 //    private final RedisConnection connection;
-//    //private final RedisTemplate<String, String> template;
 //    private final RedisOperations<String, Aircraft> redisOperations;
 //
 //    PollPlaneFinder(RedisConnectionFactory connectionFactory, RedisOperations<String, Aircraft> redisOperations) {
