@@ -71,15 +71,13 @@ class PollPlaneFinder {
     private WebClient client = WebClient.create("http://localhost:7634/aircraft");
 
     private final RedisConnectionFactory connectionFactory;
-    private final RedisConnection connection;
     private final RedisOperations<String, Aircraft> redisOperations;
 
     PollPlaneFinder(RedisConnectionFactory connectionFactory, RedisOperations<String, Aircraft> redisOperations) {
         this.connectionFactory = connectionFactory;
-        this.connection = connectionFactory.getConnection();
         this.redisOperations = redisOperations;
 
-        connection.serverCommands().flushDb();
+        connectionFactory.getConnection().serverCommands().flushDb();
     }
 
     @Scheduled(fixedRate = 1000)
